@@ -12,7 +12,7 @@ def Corr(A, b):
     for i in range(len(A)):
         ma = max(A[i])
         if ma <= (sum(A[i])-ma):
-            raise Exception('Every row should have an element which is bigger than sum of other elements in row')
+            raise Exception("Every row should have an element which absolute value is bigger than sum of other elements absolute values in row")
         for j in range(len(A)):
             if A[i][j] == ma:
                 in_ = j
@@ -21,7 +21,7 @@ def Corr(A, b):
             A[[i, in_]] = A[[in_, i]]
             b[[i,in_]] = b[[in_,i]]
     for i in range(len(A)):
-        max_ = max(A[i])
+        max_ = max(abs(A[i]))
         for j in range(len(A)):
             A[i][j] /= max_
         b[i][0] /= max_
