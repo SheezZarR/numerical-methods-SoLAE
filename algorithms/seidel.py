@@ -10,7 +10,7 @@ def Corr(A, b):
 
     in_ = 0
     for i in range(len(A)):
-        ma = max(A[i])
+        ma = max(abs(A[i]))
         if ma <= (sum(A[i])-ma):
             raise Exception("Every row should have an element which absolute value is bigger than sum of other elements absolute values in row")
         for j in range(len(A)):
