@@ -12,7 +12,7 @@ def three_diag_check(m):
 '''Функция проверки на правильность трёхдиагональной матрицы'''
 
 
-def tuda(m):
+def forward(m):
     arr = [0] * 2 * len(m)
     arr[0] = round(m[0][1]/(-m[0][0]), 2)
     arr[1] = round(m[0][len(m[0]) - 1]/(m[0][0]), 2)
@@ -25,7 +25,7 @@ def tuda(m):
 '''Функция прямого хода'''
 
 
-def obratno(m, k):
+def backward(m, k):
     xarr = [0] * len(m)
     k[len(k) - 1] = round((m[len(m) - 1][len(m) - 1 - 1] * k[len(m) - 1 * 2 + 1 - 2] - m[len(m) - 1][len(m[0]) - 1])/(-m[len(m) - 1][len(m) - 1] - m[len(m) - 1][len(m) - 1 - 1] * k[len(m) - 1 * 2 - 2]), 2)
     xarr[len(m) - 1] = k[len(k) - 1]
@@ -42,4 +42,4 @@ if __name__ == '__main__':
     if(three_diag_check(mat) != True):
         print("Заданная матрица не соответствует выбранному методу решения")
     else:
-        print(obratno(mat, tuda(mat)))
+        print(backward(mat, forward(mat)))
