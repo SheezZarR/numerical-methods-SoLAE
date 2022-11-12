@@ -28,6 +28,7 @@ def Corr(A, b):
     return A, b
 
 def Zeydel(A, b, e):
+    A, b = A.astype(float), b.astype(float)
     m = len(A)
     x = [0. for i in range(m)]
     count = 0
