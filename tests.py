@@ -3,6 +3,7 @@ import unittest
 from algorithms import gauss_elimination as gauel
 from algorithms import seidel
 from algorithms import tridiagonal_matrix_algorithm as trimatal
+from algorithms import Simple_Iteration as sim
 
 from equations.tridiagonal_sample import matrix as tridiag_m, vec as tridiag_v, correct_ans as tridiag_ans
 
@@ -63,7 +64,17 @@ class TestLUDecompMethod(unittest.TestCase):
 
 class TestSimpleIterMethod(unittest.TestCase):
     """Test cases for simple iteration method."""
-    pass
+    def test_Simple_Iter_method_1(self):
+        test = sim.SimpleIt(coef_mat1, vec1)
+        self.assertEqual(ans1, test)
+
+    def test_Simple_Iter_method_2(self):
+        test = sim.SimpleIt(coef_mat2, vec2)
+        self.assertEqual(ans2, test)
+
+    def test_Simple_Iter_method_3(self):
+        test = sim.SimpleIt(coef_mat3, vec3)
+        self.assertEqual(ans3, test)
 
 
 class TestSeidelMethod(unittest.TestCase):
