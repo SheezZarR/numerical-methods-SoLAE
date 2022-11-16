@@ -50,9 +50,3 @@ def is_singular(m):
         if not m[i][i]:
             return True
     return False
-if __name__ == '__main__':
-    m = [[1, 1, 1, 9],
-    [2, -3, 4, 13],
-    [3, 4, 5, 40]
-]
-    solve_gauss(m)
