@@ -73,11 +73,11 @@ def solve_LU(matrix, b, corr_coef):
 
     return np.round(x, corr_coef)
 
-
 def test():
     print(solve_LU(sample1.matrix, sample1.vec, 5), sample1.correct_ans)
-    print(solve_LU(sample2.matrix, sample2.vec, 1), sample2.correct_ans)
+    print(solve_LU(sample2.matrix, sample2.vec, 5), sample2.correct_ans)
     print(solve_LU(sample3.matrix, sample3.vec, 5), sample3.correct_ans)
+
 
 if __name__ == '__main__':
     test()

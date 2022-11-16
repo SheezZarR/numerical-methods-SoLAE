@@ -9,4 +9,4 @@ vec = [-2, 2, 11, -7]
 
 correct_ans = [1, -1, 0, 1]
 
-corr_coef = 1e-2
+corr_coef = 4

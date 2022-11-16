@@ -1,9 +1,10 @@
 """
 Gauss elimination method for solving system of linear equations.
 """
+from typing import List
 
 
-def add_column(matrix: list[list], vec) -> list[list]:
+def add_column(matrix: List[list], vec: list) -> List[list]:
     """Adds a vector to a matrix"""
 
     if len(matrix) != len(vec):
@@ -15,7 +16,7 @@ def add_column(matrix: list[list], vec) -> list[list]:
     return matrix
 
 
-def back_substitution(aug_matrix: list[list], n: int) -> list:
+def back_substitution(aug_matrix: List[list], n: int) -> list:
 
     ans_vec = [0 for i in range(n)]
     ans_vec[n - 1] = aug_matrix[n - 1][n] / aug_matrix[n - 1][n - 1]
@@ -31,7 +32,7 @@ def back_substitution(aug_matrix: list[list], n: int) -> list:
     return ans_vec
 
 
-def gauss_elimination(matrix: list[list], vec_of_unknowns: list, *args) -> list[list]:
+def gauss_elimination(matrix: List[list], vec_of_unknowns: list, *args) -> List[list]:
     aug_matrix = add_column(matrix, vec_of_unknowns)
     n = len(vec_of_unknowns)
 

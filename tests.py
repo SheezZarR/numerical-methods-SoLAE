@@ -91,3 +91,8 @@ class TestSeidelMethod(unittest.TestCase):
     def test_seidel_method_3(self):
         test = seidel.Zeydel(coef_mat3, vec3, coef3)
         self.assertEqual(ans3, test)
+
+if __name__ == '__main__':
+    TestSeidelMethod().test_seidel_method_1()
+    TestSeidelMethod().test_seidel_method_2()
+    TestSeidelMethod().test_seidel_method_3()

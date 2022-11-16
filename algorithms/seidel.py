@@ -31,7 +31,8 @@ def Corr(A, b):
         b[i] /= z
     return A, b
 
-def Zeydel(A, b, e=1e-5):
+def Zeydel(A, b, e=5):
+    e_ = pow(10, -e)
     A, b = np.array(A), np.array(b)
     A, b = A.astype(float), b.astype(float)
     m = len(A)
@@ -47,9 +48,10 @@ def Zeydel(A, b, e=1e-5):
             x_new[i] = b[i] - s1 - s2  # Получаем начальные значения для x1,x2,x3,...,xn
         #print(x_new)
         pogr = sum(abs(x_new[i] - x[i]) for i in range(m))  # погрешность
-        if pogr < e:
+        if pogr < e_:
             break
         count += 1
         x = x_new
+    x = np.round(x, e)
     x = list(x)
     return x

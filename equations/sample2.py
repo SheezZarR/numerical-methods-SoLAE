@@ -7,6 +7,6 @@ matrix = [
 
 vec = [3.901, 7, 6]
 
-correct_ans = [1, -1, 0]
+correct_ans = [0, -1, 1]
 
 corr_coef = 0.1
