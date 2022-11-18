@@ -26,6 +26,10 @@ def Corr(A, b):
             b[[i, in_]] = b[[in_, i]]
 
     for i in range(len(A)):
+        if abs(A[i][i]) != max(abs(A[i])):
+            raise Exception("Use matrix which can be modified into a diagonally dominant one")
+
+    for i in range(len(A)):
         z = A[i][i]
         for j in range(len(A)):
             A[i][j] /= z
