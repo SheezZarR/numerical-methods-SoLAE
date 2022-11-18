@@ -70,15 +70,15 @@ class TestLUDecompMethod(unittest.TestCase):
     """Test cases for LU decomposition method."""
 
     def test_LU_Decomposition_method_1(self):
-        test = lude.solve_LU(coef_mat1, vec1, coef1)
+        test = lude.solve_LU(coef_mat1, vec1)
         self.assertEqual(test, ans1)
 
-    def test_Simple_Iter_method_2(self):
-        test = lude.solve_LU(coef_mat2, vec2, coef2)
+    def test_LU_Decomposition_method_2(self):
+        test = lude.solve_LU(coef_mat2, vec2)
         self.assertEqual(ans2, test)
 
-    def test_Simple_Iter_method_3(self):
-        test = lude.solve_LU(coef_mat3, vec3, coef3)
+    def test_LU_Decomposition_method_3(self):
+        test = lude.solve_LU(coef_mat3, vec3)
         self.assertEqual(ans3, test)
 
 
