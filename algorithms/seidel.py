@@ -3,17 +3,13 @@ import numpy as np
 
 
 def Corr(A, b):
-    if len(A) != len(A[0]):
-        raise Exception('Matrix must be square')
-    if len(A) != len(b):
-        raise Exception('The vector should contain n(number of our unknown variables) floats')
 
     in_ = 0
     for i in range(len(A)):
         ma = max(abs(A[i]))
 
         if ma <= (sum(abs(A[i]))-ma):
-            raise Exception("Every row should have an element which absolute value is bigger than sum of other elements absolute values in row")
+            raise ValueError("Every row should have an element which absolute value is bigger than sum of other elements absolute values in row")
     for i in range(len(A)):
         ma = max(abs(A[i]))
         for j in range(len(A)):
@@ -31,6 +27,7 @@ def Corr(A, b):
             A[i][j] /= z
         b[i] /= z
     return A, b
+
 
 def Zeydel(A, b, e=5):
     e_ = pow(10, -e)

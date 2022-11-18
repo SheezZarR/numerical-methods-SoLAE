@@ -50,16 +50,7 @@ class TestTridiagonalMethod(unittest.TestCase):
     """Test cases for tridiagonal matrix method."""
 
     def test_tridiagonal_matrix_algorithm_1(self):
-        test = trimatal.backward(coef_mat1, vec1)
-        self.assertEqual(ans1, test)
-
-    def test_tridiagonal_matrix_algorithm_2(self):
-        test = trimatal.backward(coef_mat2, vec2)
-        self.assertEqual(ans2, test)
-
-    def test_tridiagonal_matrix_algorithm_3(self):
-        test = trimatal.backward(coef_mat3, vec3)
-        self.assertEqual(ans3, test)
+        self.assertRaises(ValueError, trimatal.backward(coef_mat1, vec1))
 
     def test_tridiagonal_matrix_algorithm_4(self):
         test = trimatal.backward(tridiag_m, tridiag_v)
@@ -85,12 +76,10 @@ class TestLUDecompMethod(unittest.TestCase):
 class TestSimpleIterMethod(unittest.TestCase):
     """Test cases for simple iteration method."""
     def test_Simple_Iter_method_1(self):
-        test = sim.SimpleIt(coef_mat1, vec1)
-        self.assertEqual(ans1, test)
+        self.assertRaises(ValueError, sim.SimpleIt(coef_mat1, vec1))
 
     def test_Simple_Iter_method_2(self):
-        test = sim.SimpleIt(coef_mat2, vec2)
-        self.assertEqual(ans2, test)
+        self.assertRaises(ValueError, sim.SimpleIt(coef_mat2, vec2))
 
     def test_Simple_Iter_method_3(self):
         test = sim.SimpleIt(coef_mat3, vec3)
@@ -101,12 +90,10 @@ class TestSeidelMethod(unittest.TestCase):
     """Test cases for Seidel method."""
 
     def test_seidel_method_1(self):
-        test = seidel.Zeydel(coef_mat1, vec1, coef1)
-        self.assertEqual(ans1, test)
+        self.assertRaises(ValueError, seidel.Zeydel(coef_mat1, vec1, coef1))
 
     def test_seidel_method_2(self):
-        test = seidel.Zeydel(coef_mat2, vec2, coef2)
-        self.assertEqual(ans2, test)
+        self.assertRaises(ValueError, seidel.Zeydel(coef_mat2, vec2, coef2))
 
     def test_seidel_method_3(self):
         test = seidel.Zeydel(coef_mat3, vec3, coef3)
