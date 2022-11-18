@@ -1,9 +1,13 @@
 import unittest
 
 from algorithms import gauss_elimination as gauel
-from algorithms import seidel
+from algorithms import gauss_method as gausm
+from algorithms import gauss_leader as gaule
 from algorithms import tridiagonal_matrix_algorithm as trimatal
+from algorithms import seidel
 from algorithms import Simple_Iteration as sim
+from algorithms import LU_decomposition as lude
+
 
 from equations.tridiagonal_sample import matrix as tridiag_m, vec as tridiag_v, correct_ans as tridiag_ans
 
@@ -14,6 +18,9 @@ from equations.sample3 import matrix as coef_mat3, vec as vec3, correct_ans as a
 
 class TestGausMethod(unittest.TestCase):
     """Test cases for gaussian method."""
+    def test_gauss_method_1(self):
+        test = gausm.gauss(coef_mat1, vec1)
+        self.assertEqual(test, ans1)
 
 
 class TestGauelMethod(unittest.TestCase):
@@ -34,7 +41,9 @@ class TestGauelMethod(unittest.TestCase):
 
 class TestGauPivotingMethod(unittest.TestCase):
     """Test cases for gauss with pivoting."""
-    pass
+
+    def test_gauss_pivoting_method(self):
+        test = gaule.solve_gauss()
 
 
 class TestTridiagonalMethod(unittest.TestCase):
@@ -59,7 +68,18 @@ class TestTridiagonalMethod(unittest.TestCase):
 
 class TestLUDecompMethod(unittest.TestCase):
     """Test cases for LU decomposition method."""
-    pass
+
+    def test_LU_Decomposition_method_1(self):
+        test = lude.solve_LU(coef_mat1, vec1, coef1)
+        self.assertEqual(test, ans1)
+
+    def test_Simple_Iter_method_2(self):
+        test = lude.solve_LU(coef_mat2, vec2, coef2)
+        self.assertEqual(ans2, test)
+
+    def test_Simple_Iter_method_3(self):
+        test = lude.solve_LU(coef_mat3, vec3, coef3)
+        self.assertEqual(ans3, test)
 
 
 class TestSimpleIterMethod(unittest.TestCase):
@@ -92,7 +112,3 @@ class TestSeidelMethod(unittest.TestCase):
         test = seidel.Zeydel(coef_mat3, vec3, coef3)
         self.assertEqual(ans3, test)
 
-if __name__ == '__main__':
-    TestSeidelMethod().test_seidel_method_1()
-    TestSeidelMethod().test_seidel_method_2()
-    TestSeidelMethod().test_seidel_method_3()
