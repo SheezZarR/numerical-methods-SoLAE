@@ -55,7 +55,7 @@ def is_singular(m):
     return False
 
 
-def is_poluchau_data(m, x):
+def is_poluchau_data(mat, X):
     sa = len(X)
     mas = []
 
