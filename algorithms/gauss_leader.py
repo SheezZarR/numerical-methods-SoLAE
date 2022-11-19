@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def bubble_max_row(m, col):
     """Replace m[col] row with the one of the underlying rows with the modulo greatest first element.
     :param m: matrix (list of lists)
@@ -50,3 +53,21 @@ def is_singular(m):
         if not m[i][i]:
             return True
     return False
+
+
+def is_poluchau_data(m, x):
+    sa = len(X)
+    mas = []
+
+    for i in range(sa):
+        mas.append([0] * 1)
+        mas[i][0] = X[i]
+    m = np.hstack((mat, mas))
+    solve_gauss(m)
+
+
+if __name__ == '__main__':
+    mat = [[5, 3, 0, 0], [3, 6, 1, 0], [0, 1, 4, -2], [0, 0, 1, -3]]
+    X = [8, 10, 3, -2]
+    is_poluchau_data(mat, X)
+
