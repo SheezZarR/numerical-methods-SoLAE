@@ -66,8 +66,4 @@ def is_poluchau_data(m, x):
     solve_gauss(m)
 
 
-if __name__ == '__main__':
-    mat = [[5, 3, 0, 0], [3, 6, 1, 0], [0, 1, 4, -2], [0, 0, 1, -3]]
-    X = [8, 10, 3, -2]
-    is_poluchau_data(mat, X)
 
