@@ -73,11 +73,14 @@ def solve_LU(matrix, b, corr_coef = 4):
 
     return np.round(x, corr_coef).tolist()
 
-def test():
+def my_matrix():
     print(solve_LU(sample1.matrix, sample1.vec, 5), sample1.correct_ans)
     print(solve_LU(sample2.matrix, sample2.vec, 5), sample2.correct_ans)
     print(solve_LU(sample3.matrix, sample3.vec, 5), sample3.correct_ans)
+    a = np.matrix(np.random.random((1000, 1000)))
+    b = np.matrix(np.random.random((1, 1000)))
+    print(solve_LU(a, b))
 
 
 if __name__ == '__main__':
-    test()
+    my_matrix()
