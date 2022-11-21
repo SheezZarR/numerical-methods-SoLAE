@@ -3,18 +3,15 @@ import numpy as np
 
 
 def Corr(A, b):
-    if len(A) != len(A[0]):
-        raise Exception('Matrix must be square')
-    if len(A) != len(b):
-        raise Exception('The vector should contain n(number of our unknown variables) floats')
 
     in_ = 0
     for i in range(len(A)):
         ma = max(abs(A[i]))
 
-        if ma <= (sum(A[i])-ma):
-            raise Exception("Every row should have an element which absolute value is bigger than sum of other elements absolute values in row")
-
+        if ma <= (sum(abs(A[i]))-ma):
+            raise ValueError("Every row should have an element which absolute value is bigger than sum of other elements absolute values in row")
+    for i in range(len(A)):
+        ma = max(abs(A[i]))
         for j in range(len(A)):
             if A[i][j] == ma:
                 in_ = j
@@ -25,11 +22,16 @@ def Corr(A, b):
             b[[i, in_]] = b[[in_, i]]
 
     for i in range(len(A)):
+        if abs(A[i][i]) != max(abs(A[i])):
+            raise Exception("Use matrix which can be modified into a diagonally dominant one")
+
+    for i in range(len(A)):
         z = A[i][i]
         for j in range(len(A)):
             A[i][j] /= z
         b[i] /= z
     return A, b
+
 
 def Zeydel(A, b, e=5):
     e_ = pow(10, -e)

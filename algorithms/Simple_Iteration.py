@@ -1,20 +1,15 @@
-# метод простой итерации
+# метод простой итерации(аккуратно спижено у Руслана)
 import numpy as np
 from math import *
 
 
 def Corr(A, b):
-    if len(A) != len(A[0]):
-        raise Exception('Matrix must be square')
-    if len(A) != len(b):
-        raise Exception('The vector should contain n(number of our unknown variables) floats')
-
     in_ = 0
     indMax = [0 for i in range(len(A))]
     for i in range(len(A)):
         ma = max(abs(A[i]))
         if ma <= (sum(abs(A[i])) - ma):
-            raise Exception(
+            raise ValueError(
                 "Every row should have an element which absolute value is bigger than sum of other elements absolute values in row")
 
         for j in range(len(A)):
@@ -25,7 +20,7 @@ def Corr(A, b):
     for i in range(len(indMax)):
         for j in range(i + 1, len(indMax)):
             if indMax[i] == indMax[j]:
-                raise Exception('All biggest elements in the rows should be in different columns')
+                raise ValueError('All biggest elements in the rows should be in different columns')
 
     for i in range(len(A)):
         if indMax[i] != i:

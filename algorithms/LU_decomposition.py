@@ -46,7 +46,7 @@ def get_U(m):
     return U
 
 
-def solve_LU(matrix, b, corr_coef):
+def solve_LU(matrix, b, corr_coef = 4):
     """
     Solve system of equations from given LU-matrix and vector b of absolute terms.
 
@@ -71,7 +71,7 @@ def solve_LU(matrix, b, corr_coef):
 
     x, = np.array(x.T)
 
-    return np.round(x, corr_coef)
+    return np.round(x, corr_coef).tolist()
 
 def test():
     print(solve_LU(sample1.matrix, sample1.vec, 5), sample1.correct_ans)

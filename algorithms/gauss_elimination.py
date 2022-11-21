@@ -32,7 +32,7 @@ def back_substitution(aug_matrix: List[list], n: int) -> list:
     return ans_vec
 
 
-def gauss_elimination(matrix: List[list], vec_of_unknowns: list, *args) -> List[list]:
+def gauss_elimination(matrix: List[list], vec_of_unknowns: list) -> List[list]:
     aug_matrix = add_column(matrix, vec_of_unknowns)
     n = len(vec_of_unknowns)
 
