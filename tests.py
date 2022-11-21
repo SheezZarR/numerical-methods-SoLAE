@@ -14,6 +14,8 @@ from equations.tridiagonal_sample import matrix as tridiag_m, vec as tridiag_v, 
 from equations.sample1 import matrix as coef_mat1, vec as vec1, correct_ans as ans1, corr_coef as coef1
 from equations.sample2 import matrix as coef_mat2, vec as vec2, correct_ans as ans2, corr_coef as coef2
 from equations.sample3 import matrix as coef_mat3, vec as vec3, correct_ans as ans3, corr_coef as coef3
+from equations.sample_desparse_1 import matrix as coef_mat4, vec as vec4, correct_ans as ans4
+from equations.sample_desparse_2 import matrix as coef_mat5, vec as vec5, correct_ans as ans5
 
 
 class TestGausMethod(unittest.TestCase):
@@ -37,6 +39,11 @@ class TestGauelMethod(unittest.TestCase):
     def test_gauss_elimination_method_3(self):
         test = gauel.gauss_elimination(coef_mat3, vec3)
         self.assertEqual(ans3, test)
+
+    def test_gauss_elimination_method_4(self):
+        test = gauel.gauss_elimination(coef_mat5, vec5)
+
+        self.assertEqual(test, ans5)
 
 
 class TestGauPivotingMethod(unittest.TestCase):
@@ -71,6 +78,11 @@ class TestLUDecompMethod(unittest.TestCase):
     def test_LU_Decomposition_method_3(self):
         test = lude.solve_LU(coef_mat3, vec3)
         self.assertEqual(ans3, test)
+
+    def test_LU_Decomposition_method_4(self):
+        print(coef_mat5)
+        test = lude.solve_LU(coef_mat5, vec5)
+        self.assertEqual(ans5, test)
 
 
 class TestSimpleIterMethod(unittest.TestCase):

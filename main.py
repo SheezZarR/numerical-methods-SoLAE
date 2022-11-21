@@ -64,14 +64,15 @@ def Dense_matrix(n: int):
 def write_to_file_true(file_num, coef_mat, vec, ans):
     with open("equations/sample_desparse_" + str(file_num) + ".py", 'w', encoding='UTF-8') as file:
         file.write("matrix = " + coef_mat.tolist().__str__() + "\n")
-        file.write("vec = " + vec.tolist().__str__() + "\n")
-        file.write("correct_ans = " + ans.tolist().__str__() + "\n")
+        file.write("vec = " + vec.reshape(1, 1000).tolist().__str__() + "\n")
+        file.write("correct_ans = " + ans.reshape(1, 1000).tolist().__str__() + "\n")
 
 
 def main():
     a, b, c = Sparse_matrix(1000)
-    write_to_file_true(1, a.round(1), b.round(1), c.round(1))
-    # write_to_file_true(2, a.round(0), b.round(0), c.round(0))
+    write_to_file_true(1, a.round(4), b.round(4), c.round(4))
+    a, b, c = Dense_matrix(1000)
+    write_to_file_true(2, a.round(4), b.round(4), c.round(4))
 
 
 if __name__ == '__main__':
