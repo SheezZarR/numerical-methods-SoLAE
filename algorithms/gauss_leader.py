@@ -17,7 +17,7 @@ def bubble_max_row(m, col):
         m[col], m[max_row] = m[max_row], m[col]
 
 
-def solve_gauss(m):
+def solve(m):
     """Solve linear equations system with gaussian method.
     :param m: matrix (list of lists)
     :return: None
@@ -41,7 +41,7 @@ def solve_gauss(m):
     x = [0 for i in range(n)]
     for k in range(n - 1, -1, -1):
         x[k] = (m[k][-1] - sum([m[k][j] * x[j] for j in range(k + 1, n)])) / m[k][k]
-    print(x)
+    return x
 
 
 def is_singular(m):
@@ -63,7 +63,7 @@ def is_poluchau_data(mat, X):
         mas.append([0] * 1)
         mas[i][0] = X[i]
     m = np.hstack((mat, mas))
-    solve_gauss(m)
+    solve(m)
 
 
 
