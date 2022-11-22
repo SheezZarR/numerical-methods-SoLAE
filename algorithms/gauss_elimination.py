@@ -3,20 +3,10 @@ Gauss elimination method for solving system of linear equations.
 """
 from typing import List
 
-
-def add_column(matrix: List[list], vec: list) -> List[list]:
-    """Adds a vector to a matrix"""
-
-    if len(matrix) != len(vec):
-        raise RuntimeError(f"Wrong vector size")
-
-    for i in range(len(matrix)):
-        matrix[i].append(vec[i])
-
-    return matrix
+import numpy as np
 
 
-def back_substitution(aug_matrix: List[list], n: int) -> list:
+def back_substitution(aug_matrix: np.ndarray, n: int) -> List:
 
     ans_vec = [0 for i in range(n)]
     ans_vec[n - 1] = aug_matrix[n - 1][n] / aug_matrix[n - 1][n - 1]
@@ -32,11 +22,10 @@ def back_substitution(aug_matrix: List[list], n: int) -> list:
     return ans_vec
 
 
-def gauss_elimination(matrix: List[list], vec_of_unknowns: list) -> List[list]:
-    aug_matrix = add_column(matrix, vec_of_unknowns)
-    n = len(vec_of_unknowns)
+def gauss_elimination(matrix: np.ndarray, vec_of_unknowns: np.ndarray) -> List:
+    aug_matrix = np.hstack((matrix, vec_of_unknowns))
+    n = vec_of_unknowns.shape[0]
 
-    # Creation of Upper Triangular Matrix
     for i in range(0, n - 1):
         if aug_matrix[i][i] == 0.0:
             raise RuntimeError("Unable to create Upper Triangular Matrix")
@@ -47,6 +36,4 @@ def gauss_elimination(matrix: List[list], vec_of_unknowns: list) -> List[list]:
             for k in range(0, n + 1):
                 aug_matrix[j][k] = aug_matrix[j][k] - ratio * aug_matrix[i][k]
 
-    ans = back_substitution(aug_matrix, n)
-
-    return ans
+    return back_substitution(aug_matrix, n)

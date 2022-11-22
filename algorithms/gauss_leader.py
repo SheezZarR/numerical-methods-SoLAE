@@ -22,8 +22,7 @@ def solve(m, X):
     :param m: matrix (list of lists)
     """
     nn = len(X)
-    for i in range(nn):
-        m[i].append(X[i])
+    m = np.hstack((m, X))
     n = len(m)
     # forward trace
     for k in range(n - 1):

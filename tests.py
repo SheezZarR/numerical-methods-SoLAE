@@ -1,5 +1,7 @@
 import unittest
 
+import numpy as np
+
 from algorithms import gauss_elimination as gauel
 from algorithms import gauss_method as gausm
 from algorithms import gauss_leader as gaule
@@ -18,10 +20,26 @@ from equations.sample_desparse_1 import matrix as coef_mat4, vec as vec4, correc
 from equations.sample_desparse_2 import matrix as coef_mat5, vec as vec5, correct_ans as ans5
 
 
+def cook_data(matrix, vec) -> (np.ndarray, np.ndarray):
+    return (
+        np.ndarray(
+            shape=(len(matrix), len(matrix)),
+            buffer=np.array([np.array(row) for row in matrix], dtype=float),
+            dtype=float
+        ),
+        np.ndarray(
+            shape=(len(vec), 1),
+            buffer=np.array([column for column in vec], dtype=float),
+            dtype=float
+        )
+    )
+
+
 class TestGausMethod(unittest.TestCase):
     """Test cases for gaussian method."""
     def test_gauss_method_1(self):
-        test = gausm.gauss(coef_mat1, vec1)
+        cfm, vc = cook_data(coef_mat1, vec1)
+        test = gausm.gauss(cfm, vc)
         self.assertEqual(test, ans1)
 
 
@@ -29,19 +47,23 @@ class TestGauelMethod(unittest.TestCase):
     """Test cases for gauss elimination method."""
 
     def test_gauss_elimination_method_1(self):
-        test = gauel.gauss_elimination(coef_mat1, vec1)
+        cfm, vc = cook_data(coef_mat1, vec1)
+        test = gauel.gauss_elimination(cfm, vc)
         self.assertEqual(ans1, test)
 
     def test_gauss_elimination_method_2(self):
-        test = gauel.gauss_elimination(coef_mat2, vec2)
+        cfm, vc = cook_data(coef_mat2, vec2)
+        test = gauel.gauss_elimination(cfm, vc)
         self.assertEqual(ans2, test)
 
     def test_gauss_elimination_method_3(self):
-        test = gauel.gauss_elimination(coef_mat3, vec3)
+        cfm, vc = cook_data(coef_mat3, vec3)
+        test = gauel.gauss_elimination(cfm, vc)
         self.assertEqual(ans3, test)
 
     def test_gauss_elimination_method_4(self):
-        test = gauel.gauss_elimination(coef_mat5, vec5)
+        cfm, vs = cook_data(coef_mat5, vec5)
+        test = gauel.gauss_elimination(cfm, vs)
 
         self.assertEqual(test, ans5)
 
@@ -50,7 +72,9 @@ class TestGauPivotingMethod(unittest.TestCase):
     """Test cases for gauss with pivoting."""
 
     def test_gauss_pivoting_method(self):
-        test = gaule.solve_gauss()
+        cfm, vc = cook_data(coef_mat1, vec1)
+        test = gaule.solve(cfm, vc)
+        self.assertEqual(test, ans1)
 
 
 class TestTridiagonalMethod(unittest.TestCase):
@@ -60,7 +84,8 @@ class TestTridiagonalMethod(unittest.TestCase):
         self.assertRaises(ValueError, trimatal.backward(coef_mat1, vec1))
 
     def test_tridiagonal_matrix_algorithm_4(self):
-        test = trimatal.backward(tridiag_m, tridiag_v)
+        cfm, vc = cook_data(tridiag_m, tridiag_v)
+        test = trimatal.backward(cfm, vc)
         self.assertEqual(tridiag_ans, test)
 
 
@@ -80,34 +105,29 @@ class TestLUDecompMethod(unittest.TestCase):
         self.assertEqual(ans3, test)
 
     def test_LU_Decomposition_method_4(self):
-        print(coef_mat5)
         test = lude.solve_LU(coef_mat5, vec5)
         self.assertEqual(ans5, test)
 
 
 class TestSimpleIterMethod(unittest.TestCase):
     """Test cases for simple iteration method."""
-    def test_Simple_Iter_method_1(self):
-        self.assertRaises(ValueError, sim.SimpleIt(coef_mat1, vec1))
+    def test_Simple_Iter_method_incorrect_input(self):
+        cfm, vc = cook_data(coef_mat1, vec1)
+        self.assertRaises(ValueError, sim.SimpleIt(cfm, vc))
 
-    def test_Simple_Iter_method_2(self):
-        self.assertRaises(ValueError, sim.SimpleIt(coef_mat2, vec2))
-
-    def test_Simple_Iter_method_3(self):
-        test = sim.SimpleIt(coef_mat3, vec3)
+    def test_Simple_Iter_method_correct_input(self):
+        cfm, vc = cook_data(coef_mat3, vec3)
+        test = sim.SimpleIt(cfm, vc)
         self.assertEqual(ans3, test)
 
 
 class TestSeidelMethod(unittest.TestCase):
     """Test cases for Seidel method."""
 
-    def test_seidel_method_1(self):
+    def test_seidel_method_incorrect_input(self):
         self.assertRaises(ValueError, seidel.Zeydel(coef_mat1, vec1, coef1))
 
-    def test_seidel_method_2(self):
-        self.assertRaises(ValueError, seidel.Zeydel(coef_mat2, vec2, coef2))
-
-    def test_seidel_method_3(self):
+    def test_seidel_method_correct_input(self):
         test = seidel.Zeydel(coef_mat3, vec3, coef3)
         self.assertEqual(ans3, test)
 
