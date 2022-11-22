@@ -16,7 +16,7 @@ def solve(m, X):
     nn = len(X)
     m = np.hstack((m, X))
     n = len(m)
-    # forward trace
+
     for k in range(n - 1):
         bubble_max_row(m, k)
         for i in range(k + 1, n):
@@ -27,12 +27,12 @@ def solve(m, X):
             for j in range(k, n):
                 m[i][j] -= div * m[k][j]
 
-    # check modified system for nonsingularity
+
     if is_singular(m):
         print('The system has infinite number of answers.')
         return
 
-    # backward trace
+
     x = [0 for i in range(n)]
     for k in range(n - 1, -1, -1):
         x[k] = (m[k][-1] - sum([m[k][j] * x[j] for j in range(k + 1, n)])) / m[k][k]
