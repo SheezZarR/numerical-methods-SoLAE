@@ -15,8 +15,17 @@ def three_diag_check(m):
 '''Функция проверки на правильность трёхдиагональной матрицы'''
 
 
+def transfiguration(matx, vec):
+    mat = np.array([[0] * (len(matx) + 1)] * len(matx[0]), dtype = float)
+    for i in range(0, len(mat)):
+        for j in range(0, len(mat)):
+            mat[i, j] = matx[i, j]
+        mat[i, len(mat)] = vec[i]
+    return backward(mat, forward(mat))
+
+
 def forward(m):
-    arr = [0] * 2 * len(m)
+    arr = np.array([0] * 2 * len(m), dtype = float)
     arr[0] = round(m[0][1]/(-m[0][0]), 2)
     arr[1] = round(m[0][len(m[0]) - 1]/(m[0][0]), 2)
     for i in range(1, len(m) - 1):
@@ -29,7 +38,7 @@ def forward(m):
 
 
 def backward(m, k):
-    xarr = np.array([0] * len(m))
+    xarr = np.array([0] * len(m), dtype = float)
     k[len(k) - 1] = round((m[len(m) - 1][len(m) - 1 - 1] * k[len(m) - 1 * 2 + 1 - 2] - m[len(m) - 1][len(m[0]) - 1])/(-m[len(m) - 1][len(m) - 1] - m[len(m) - 1][len(m) - 1 - 1] * k[len(m) - 1 * 2 - 2]), 2)
     xarr[len(m) - 1] = k[len(k) - 1]
     for i in range(len(m) - 2, -1, -1):
@@ -41,8 +50,10 @@ def backward(m, k):
 
 
 if __name__ == '__main__':
-    mat = np.array([[5, 3, 0, 0, 8], [3, 6, 1, 0, 10], [0, 1, 4, -2, 3], [0, 0, 1, -3, -2]])
+    mat = np.array([[5.0, 3, 0, 0], [3, 6, 1, 0], [0, 1, 4, -2], [0, 0, 1, -3]], dtype = float)
+    vec = np.array([8.0, 10, 3, -2], dtype = float)
+
     if(three_diag_check(mat) != True):
         print("Заданная матрица не соответствует выбранному методу решения")
     else:
-        print(backward(mat, forward(mat)))
+        print(transfiguration(mat, vec))
