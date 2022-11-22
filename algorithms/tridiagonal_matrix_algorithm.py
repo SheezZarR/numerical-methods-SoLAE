@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def three_diag_check(m):
     tmp = True
     for i in range(0, len(m) - 2):
@@ -26,7 +29,7 @@ def forward(m):
 
 
 def backward(m, k):
-    xarr = [0] * len(m)
+    xarr = np.array([0] * len(m))
     k[len(k) - 1] = round((m[len(m) - 1][len(m) - 1 - 1] * k[len(m) - 1 * 2 + 1 - 2] - m[len(m) - 1][len(m[0]) - 1])/(-m[len(m) - 1][len(m) - 1] - m[len(m) - 1][len(m) - 1 - 1] * k[len(m) - 1 * 2 - 2]), 2)
     xarr[len(m) - 1] = k[len(k) - 1]
     for i in range(len(m) - 2, -1, -1):
@@ -38,7 +41,7 @@ def backward(m, k):
 
 
 if __name__ == '__main__':
-    mat = [[5, 3, 0, 0, 8], [3, 6, 1, 0, 10], [0, 1, 4, -2, 3], [0, 0, 1, -3, -2]]
+    mat = np.array([[5, 3, 0, 0, 8], [3, 6, 1, 0, 10], [0, 1, 4, -2, 3], [0, 0, 1, -3, -2]])
     if(three_diag_check(mat) != True):
         print("Заданная матрица не соответствует выбранному методу решения")
     else:
