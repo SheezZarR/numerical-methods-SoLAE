@@ -2,11 +2,6 @@ import numpy as np
 
 
 def bubble_max_row(m, col):
-    """Replace m[col] row with the one of the underlying rows with the modulo greatest first element.
-    :param m: matrix (list of lists)
-    :param col: index of the column/row from which underlying search will be launched
-    :return: None. Function changes the matrix structure.
-    """
     max_element = m[col][col]
     max_row = col
     for i in range(col + 1, len(m)):
@@ -18,9 +13,6 @@ def bubble_max_row(m, col):
 
 
 def solve(m, X):
-    """Solve linear equations system with gaussian method.
-    :param m: matrix (list of lists)
-    """
     nn = len(X)
     m = np.hstack((m, X))
     n = len(m)
@@ -37,7 +29,7 @@ def solve(m, X):
 
     # check modified system for nonsingularity
     if is_singular(m):
-        print('The system has infinite number of answers...')
+        print('The system has infinite number of answers.')
         return
 
     # backward trace
@@ -48,21 +40,9 @@ def solve(m, X):
 
 
 def is_singular(m):
-    """Check matrix for nonsingularity.
-    :param m: matrix (list of lists)
-    :return: True if system is nonsingular
-    """
-
     for i in range(len(m)):
         if not m[i][i]:
             return True
     return False
 
 
-"""if __name__ == "__main__":    
-    #m = [[2, 2, 3, 1 ], [1, -1, 0, 0], [-1, 2, 1, 2]]
-
-    m = [[2, 2, 3 ], [1, -1, 0], [-1, 2, 1]]
-    X=[1, 0 , 2]
-
-    print(solve(m, X))"""
