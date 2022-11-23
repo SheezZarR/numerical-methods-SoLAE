@@ -71,7 +71,7 @@ class TestGauelMethod(unittest.TestCase):
 class TestGauPivotingMethod(unittest.TestCase):
     """Test cases for gauss with pivoting."""
 
-    def test_gauss_pivoting_method(self):
+    def test_gauss_pivoting_method_correct_data(self):
         cfm, vc = cook_data(coef_mat1, vec1)
         test = gaule.solve(cfm, vc)
         self.assertEqual(test, ans1)
@@ -128,6 +128,7 @@ class TestSeidelMethod(unittest.TestCase):
         self.assertRaises(ValueError, seidel.Zeydel(coef_mat1, vec1, coef1))
 
     def test_seidel_method_correct_input(self):
-        test = seidel.Zeydel(coef_mat3, vec3, coef3)
+        cfm, vc = cook_data(coef_mat3, vec3)
+        test = seidel.Zeydel(cfm, vc, coef3)
         self.assertEqual(ans3, test)
 
