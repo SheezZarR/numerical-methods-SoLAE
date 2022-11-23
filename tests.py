@@ -85,7 +85,7 @@ class TestTridiagonalMethod(unittest.TestCase):
 
     def test_tridiagonal_matrix_algorithm_4(self):
         cfm, vc = cook_data(tridiag_m, tridiag_v)
-        test = trimatal.transfiguration(cfm, vc)
+        test = trimatal.transfiguration(cfm, vc).tolist()
         self.assertEqual(tridiag_ans, test)
 
 
