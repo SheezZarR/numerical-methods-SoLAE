@@ -32,9 +32,9 @@ def Corr(A, b):
                 val1 = A[i][j]
                 A[i][j] = A[ind_][j]
                 A[ind_][j] = val1
-            val2 = b[i]
-            b[i] = b[ind_]
-            b[ind_] = val2
+            val2 = b[i][0]
+            b[i][0] = b[ind_][0]
+            b[ind_][0] = val2
             val = indMax[i]
             indMax[i] = indMax[ind_]
             indMax[ind_] = val
@@ -42,7 +42,7 @@ def Corr(A, b):
         z = A[i][i]
         for j in range(len(A)):
             A[i][j] /= z
-        b[i] /= z
+        b[i][0] /= z
     for i in range(len(A)):
         for j in range(len(A)):
             if i == j:
@@ -75,7 +75,7 @@ def SimpleIt(A, b, eps=5):
             s = 0
             for j in range(m):
                 s += A[i][j] * prev[j]
-            x[i] = (s + b[i])
+            x[i] = (s + b[i][0])
         count += 1
     x = np.round(x, eps)
     x = list(x)
