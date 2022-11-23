@@ -1,41 +1,6 @@
+from copy import deepcopy
+import numpy as np
 eps = 1e-10    # погрешность
-
-def displayArray(info ,a):
-    print(info)
-    n = len(a)
-    for i in range(n):
-        line = ""
-        for j in range(n + 1):
-            line += str("%10.5f" % a[i][j]) + "      "
-            if j == n - 1:
-                line += "| "
-        print(line)
-    print("")
-
-
-def displayArray2(info ,a):
-    print(info)
-    n = len(a)
-    for i in range(n):
-        line = ""
-        for j in range(n):
-            line += str("%10.5f" % a[i][j]) + "      "
-        print(line)
-    print("")
-
-
-def displaySolution(x):
-    print("Решение системы:")
-    for i, val in enumerate(x):
-        print("x%x" % (i + 1), " = %5.5f" % val)
-
-
-def displayVec(info, r):
-    print(info)
-    n = len(r)
-    for i in range(n):
-        print("%5.5f" % r[i], end="    ")
-    print("")
 
 
 def maxelement(a, col, count_swap):
@@ -101,13 +66,20 @@ def searchSolution(a):
     n = len(a)
     solution = [0 for i in range(n)]
     for i in range(n - 1, -1, -1):
-        solution[i] = a[i][n] / a[i][i]
+        solution[i] = round(a[i][n] / a[i][i])
         for j in range(i - 1, -1, -1):
             a[j][n] -= a[j][i] * solution[i]
+
     return solution
 
 
-def gauss(a):
+def gauss(a, vec):
+    a = deepcopy(a)
+    a = list(a)
+    for _ in range(len(a)):
+        a[_] = list(a[_])
+        a[_].append(vec[_][0])
+    a = np.array(a)
     count_swap = triangle(a)
     det = determinant(a, count_swap)
     flag = checkByZero(det)
@@ -139,6 +111,7 @@ def matrix_mul_2(a, b):
                 res[i][j] += a[i][k] * b[k][j]
     return res
 
+
 def getVectorB(a):
     n = len(a)
     vectorB = []
@@ -146,9 +119,11 @@ def getVectorB(a):
         vectorB.append(a[i][n])
     return vectorB
 
+
 def getVectorA(a):
     vectorA = a[:]
     return vectorA
+
 
 def discrepancy(res, b):
     for i in range(len(b)):
@@ -187,47 +162,3 @@ def norm(a):
 def condition_number(norm_one, norm_two):
     cond = norm_one * norm_two
     return cond
-
-if __name__ == "__main__":
-    import numpy, copy
-
-    arr = numpy.loadtxt('input.txt', float)
-    clean_arr = copy.deepcopy(arr)
-
-
-    displayArray("Начальная матрица", arr)
-
-
-    # Метод Гаусса
-    count_swap = triangle(arr)
-    displayArray("Треугольная матрица", arr)
-    det = determinant(arr, count_swap)
-    flag = checkByZero(det)
-    if flag:
-        print("\nМатрица вырожденная. Определитель равен нулю\n")
-        exit(1)
-    print("Определитель: %5.5f" % det)
-    x = searchSolution(arr)
-    displaySolution(x)
-
-    # Нахождение невязки
-    b = getVectorB(clean_arr)
-    displayVec("Вектор B:", b)
-    res = matrix_mul(clean_arr, x)
-    displayVec("Результат перемножения матрицы A на вектор решения X:", res)
-    dis = discrepancy(res, b)
-    displayVec("Невязка:", dis)
-
-    # Нахождение обратной матрицы
-    inv = inverse(clean_arr)
-    displayArray2("Обратная матрица", inv)
-
-    # Нахождение числа обусловленности матрицы
-    a = getVectorA(clean_arr)
-    displayArray2("Матрица A", a)
-    norm_a = norm(clean_arr)
-    print("Норма А: ", norm_a, end="")
-    norm_inv = norm(inv)
-    print("\nНорма обратной матрицы: ", norm_inv, end="")
-    cond = condition_number(norm_a, norm_inv)
-    print("\nЧисло обусловленности матрицы: ", cond, end="")
