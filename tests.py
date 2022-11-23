@@ -85,7 +85,7 @@ class TestTridiagonalMethod(unittest.TestCase):
 
     def test_tridiagonal_matrix_algorithm_4(self):
         cfm, vc = cook_data(tridiag_m, tridiag_v)
-        test = trimatal.backward(cfm, vc)
+        test = trimatal.transfiguration(cfm, vc)
         self.assertEqual(tridiag_ans, test)
 
 
@@ -93,19 +93,18 @@ class TestLUDecompMethod(unittest.TestCase):
     """Test cases for LU decomposition method."""
 
     def test_LU_Decomposition_method_1(self):
-        test = lude.solve_LU(coef_mat1, vec1)
+        cfm, vc = cook_data(coef_mat1, vec1)
+        test = lude.solve_LU(cfm, vc)
         self.assertEqual(test, ans1)
 
-    def test_LU_Decomposition_method_2(self):
-        test = lude.solve_LU(coef_mat2, vec2)
-        self.assertEqual(ans2, test)
-
     def test_LU_Decomposition_method_3(self):
-        test = lude.solve_LU(coef_mat3, vec3)
+        cfm, vc = cook_data(coef_mat3, vec3)
+        test = lude.solve_LU(cfm, vc)
         self.assertEqual(ans3, test)
 
     def test_LU_Decomposition_method_4(self):
-        test = lude.solve_LU(coef_mat5, vec5)
+        cfm, vc = cook_data(coef_mat5, vec5)
+        test = lude.solve_LU(cfm, vc)
         self.assertEqual(ans5, test)
 
 
