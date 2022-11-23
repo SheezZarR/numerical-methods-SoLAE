@@ -4,7 +4,7 @@ from equations import sample1, sample2, sample3
 
 def decompose_to_LU(a):
     """Decompose matrix of coefficients to L and U matrices.
-     L and U triangular matrices will be represented in a single nxn matrix.
+     L and U triangular matrices will be represented in a single nxn matrix
     :param a: numpy matrix of coefficients
     :return: numpy LU matrix
     """
@@ -57,7 +57,7 @@ def solve_LU(matrix, b, corr_coef = 4):
     """
     # get lu_matrix
     lu_matrix = decompose_to_LU(np.matrix(matrix))
-    b = np.matrix(b).transpose()
+    b = np.matrix(b)
 
     # get supporting vector y
     y = np.matrix(np.zeros([lu_matrix.shape[0], 1]))
