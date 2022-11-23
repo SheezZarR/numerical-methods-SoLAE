@@ -1,5 +1,4 @@
 from typing import List
-import numpy as np
 import scipy
 import algorithms as alg
 import numpy as np
@@ -87,18 +86,33 @@ def Dense_matrix(n: int):
     return A, b, x
 
 
+def three_diag_matrix_generator(n: int):
+    n = 10
+    A = np.zeros(shape=(n, n))
+    for i in range(-1, 1):
+        d = np.diagflat(np.random.randint(1, 21, n - (i % 2)), i)
+        A = A + d
+    d = np.diagflat(np.random.randint(40, 81, n - 1), 1)
+    A = A + d
+    b = np.random.randint(50, 160, size=(n, 1))
+    x = np.linalg.solve(A, b)
+    return A, b, x
+
+
 def write_to_file_true(file_num, coef_mat, vec, ans):
     with open("equations/sample_desparse_" + str(file_num) + ".py", 'w', encoding='UTF-8') as file:
         file.write("matrix = " + coef_mat.tolist().__str__() + "\n")
-        file.write("vec = " + vec.reshape(1, 1000).tolist().__str__() + "\n")
-        file.write("correct_ans = " + ans.reshape(1, 1000).tolist().__str__() + "\n")
+        file.write("vec = " + vec.reshape(1, vec.shape[0]).tolist().__str__() + "\n")
+        file.write("correct_ans = " + ans.reshape(1, ans.shape[0]).tolist().__str__() + "\n")
 
 
 def main():
-    a, b, c = Sparse_matrix(1000)
-    write_to_file_true(1, a.round(4), b.round(4), c.round(4))
-    a, b, c = Dense_matrix(1000)
-    write_to_file_true(2, a.round(4), b.round(4), c.round(4))
+    # a, b, c = Sparse_matrix(1000)
+    # write_to_file_true(1, a.round(4), b.round(4), c.round(4))
+    # a, b, c = Dense_matrix(1000)
+    # write_to_file_true(2, a.round(4), b.round(4), c.round(4))
+    a, b, c = three_diag_matrix_generator(3)
+    write_to_file_true(3, a.round(4), b.round(4), c.round(4))
 
 
 if __name__ == '__main__':
