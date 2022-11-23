@@ -79,6 +79,7 @@ def SimpleIt(A, b, eps=5):
         count += 1
     x = np.round(x, eps)
     x = list(x)
+
     return x
 
 
