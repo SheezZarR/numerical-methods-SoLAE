@@ -59,7 +59,8 @@ def proverka(x, xPrev):
     return max(a)
 
 
-def SimpleIt(A, b, eps=0.001):
+def SimpleIt(A, b, eps=5):
+    eps_ = pow(10, (-1) * eps)
     A, b = np.array(A), np.array(b)
     A, b = A.astype(float), b.astype(float)
     m = len(A)
@@ -68,14 +69,16 @@ def SimpleIt(A, b, eps=0.001):
     count = 0
     pogr = 0
     prev = [1. for i in range(m)]
-    while (proverka(x, prev) >= eps or count == 0):
-        for i in range(m):
-            prev[i] = x[i]
+    while (proverka(x, prev) >= eps_ or count == 0):
+        prev = np.copy(x)
         for i in range(m):
             s = 0
             for j in range(m):
                 s += A[i][j] * prev[j]
             x[i] = (s + b[i])
         count += 1
+    x = np.round(x, eps)
+    x = list(x)
     return x
+
 
