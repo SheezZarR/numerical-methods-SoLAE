@@ -49,8 +49,9 @@ def searchSolution(a):
     n = len(a)
     solution = [0 for i in range(n)]
     for i in range(n - 1, -1, -1):
-        # Можно убрать округление, но тогда будет ошибка в тесте
-        solution[i] = round(a[i][n] / a[i][i])
+        solution[i] = a[i][n] / a[i][i]
+        if abs(solution[i] - round(solution[i])) < eps:
+            solution[i] = round(solution[i])
         for j in range(i - 1, -1, -1):
             a[j][n] -= a[j][i] * solution[i]
 
