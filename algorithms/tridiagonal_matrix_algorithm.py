@@ -15,15 +15,6 @@ def three_diag_check(m):
 '''Функция проверки на правильность трёхдиагональной матрицы'''
 
 
-def transfiguration(matx, vec):
-    mat = np.array([[0] * (len(matx) + 1)] * len(matx[0]), dtype = float)
-    for i in range(0, len(mat)):
-        for j in range(0, len(mat)):
-            mat[i, j] = matx[i, j]
-        mat[i, len(mat)] = vec[i]
-    return backward(mat, forward(mat))
-
-
 def forward(m):
     arr = np.array([0] * 2 * len(m), dtype = float)
     arr[0] = round(m[0][1]/(-m[0][0]), 2)
@@ -49,11 +40,23 @@ def backward(m, k):
 '''Функция обратного хода'''
 
 
+def transfiguration(matx, vec):
+    if not three_diag_check(matx):
+        raise Exception("Заданная матрица не соответствует выбранному методу решения")
+
+    mat = np.array([[0] * (len(matx) + 1)] * len(matx[0]), dtype = float)
+    for i in range(0, len(mat)):
+        for j in range(0, len(mat)):
+            mat[i, j] = matx[i, j]
+        mat[i, len(mat)] = vec[i]
+    if not (three_diag_check(mat)):
+        print("Заданная матрица не соответствует выбранному методу решения")
+    else:
+        return backward(mat, forward(mat))
+
+
 if __name__ == '__main__':
     mat = np.array([[5.0, 3, 0, 0], [3, 6, 1, 0], [0, 1, 4, -2], [0, 0, 1, -3]], dtype = float)
     vec = np.array([8.0, 10, 3, -2], dtype = float)
 
-    if not three_diag_check(mat):
-        print("Заданная матрица не соответствует выбранному методу решения")
-    else:
-        print(transfiguration(mat, vec))
+
