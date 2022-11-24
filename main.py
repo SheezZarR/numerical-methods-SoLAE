@@ -1,6 +1,13 @@
 from typing import List
+import time
 import scipy
-import algorithms as alg
+from algorithms import gauss_elimination as gauel
+from algorithms import gauss_method as gausm
+from algorithms import gauss_leader as gaule
+from algorithms import tridiagonal_matrix_algorithm as trimatal
+from algorithms import seidel
+from algorithms import Simple_Iteration as sim
+from algorithms import LU_decomposition as lude
 import numpy as np
 
 
@@ -115,5 +122,37 @@ def main():
     write_to_file_true(3, a.round(4), b.round(4), c.round(4))
 
 
+def speed_test():
+    algos_arr = [lude.solve_LU, gauel.gauss_elimination, gaule.solve, gausm.gauss,
+                 trimatal.transfiguration, seidel.Zeydel, sim.SimpleIt, ]
+
+    A = np.random.random((120, 120))
+    b = np.random.random((120, 1))
+    true_ans = np.linalg.solve(A, b)
+    print(true_ans[:6])
+    print("********************")
+    time_matr = []
+    for i, item in enumerate(algos_arr):
+        try:
+            start = time.time()
+            print(item(A.copy(), b.copy())[:6])
+            time_matr.append(time.time() - start)
+        except:
+            print(i)
+    print('time= ', time_matr)
+    print('************')
+    A, b, x = Sparse_matrix(120)
+    time_matr = []
+    for i, item in enumerate(algos_arr):
+        try:
+            start = time.time()
+            print(item(A.copy(), b.copy())[:6])
+            time_matr.append(time.time() - start)
+        except:
+            print(i)
+
+
 if __name__ == '__main__':
-    main()
+    # main()
+
+    speed_test()

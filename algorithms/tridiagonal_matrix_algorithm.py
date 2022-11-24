@@ -53,7 +53,7 @@ if __name__ == '__main__':
     mat = np.array([[5.0, 3, 0, 0], [3, 6, 1, 0], [0, 1, 4, -2], [0, 0, 1, -3]], dtype = float)
     vec = np.array([8.0, 10, 3, -2], dtype = float)
 
-    if(three_diag_check(mat) != True):
+    if not three_diag_check(mat):
         print("Заданная матрица не соответствует выбранному методу решения")
     else:
         print(transfiguration(mat, vec))

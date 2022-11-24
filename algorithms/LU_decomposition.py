@@ -14,6 +14,8 @@ def decompose_to_LU(a):
 
     for k in range(n):
         # calculate all residual k-row elements
+        if lu_matrix[k, k] == 0:
+            raise Exception('Wrong matrix')
         for j in range(k, n):
             lu_matrix[k, j] = a[k, j] - lu_matrix[k, :k] * lu_matrix[:k, j]
         # calculate all residual k-column elemetns
@@ -67,6 +69,8 @@ def solve_LU(matrix, b, corr_coef = 4):
     # get vector of answers x
     x = np.matrix(np.zeros([lu_matrix.shape[0], 1]))
     for i in range(1, x.shape[0] + 1):
+        if lu_matrix[-i, -i] == 0:
+            raise Exception('Wrong matrix')
         x[-i, 0] = (y[-i] - lu_matrix[-i, -i:] * x[-i:, 0]) / lu_matrix[-i, -i]
 
     x, = np.array(x.T)
