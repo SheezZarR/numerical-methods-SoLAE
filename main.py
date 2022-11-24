@@ -123,11 +123,13 @@ def main():
 
 
 def speed_test():
-    algos_arr = [lude.solve_LU, gauel.gauss_elimination, gaule.solve, gausm.gauss,
+    algos_arr = [gauel.gauss_elimination, lude.solve_LU, gaule.solve, gausm.gauss,
                  trimatal.transfiguration, seidel.Zeydel, sim.SimpleIt, ]
 
-    A = np.random.random((120, 120))
-    b = np.random.random((120, 1))
+    A = np.random.randint(1, 10, (3, 3))
+    b = np.random.randint(5, 8, (3, 1))
+    print(A)
+    print(b)
     true_ans = np.linalg.solve(A, b)
     print(true_ans[:6])
     print("********************")
