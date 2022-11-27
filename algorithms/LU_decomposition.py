@@ -20,6 +20,8 @@ def decompose_to_LU(a):
             lu_matrix[k, j] = a[k, j] - lu_matrix[k, :k] * lu_matrix[:k, j]
         # calculate all residual k-column elemetns
         for i in range(k + 1, n):
+            if lu_matrix[k, k] == 0:
+                raise Exception("Wrong matrix for this method")
             lu_matrix[i, k] = (a[i, k] - lu_matrix[i, : k] * lu_matrix[: k, k]) / lu_matrix[k, k]
 
     return lu_matrix
@@ -48,7 +50,7 @@ def get_U(m):
     return U
 
 
-def solve_LU(matrix, b, corr_coef = 4):
+def solve_LU(matrix, b, corr_coef=4):
     """
     Solve system of equations from given LU-matrix and vector b of absolute terms.
 
@@ -76,6 +78,7 @@ def solve_LU(matrix, b, corr_coef = 4):
     x, = np.array(x.T)
 
     return np.round(x, corr_coef).tolist()
+
 
 def my_matrix():
     print(solve_LU(sample1.matrix, sample1.vec, 5), sample1.correct_ans)

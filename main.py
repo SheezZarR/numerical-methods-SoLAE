@@ -13,25 +13,25 @@ import numpy as np
 
 def solve(coef_matr: List[list], free_coef: list) -> np.array:
     Zeidel_conditional = True
-    if not isinstance(coef_matr, list):
-        raise TypeError("coef_matr should be list")
-    if not isinstance(free_coef, list):
-        raise TypeError("free_coef should be list")
+    if not (isinstance(coef_matr, list) or isinstance(coef_matr, np.ndarray)):
+        raise TypeError("coef_matr should be list or numpy.ndarray")
+    if not (isinstance(free_coef, list) or isinstance(free_coef, np.ndarray)):
+        raise TypeError("free_coef should be list or numpy.ndarray")
     for vec in coef_matr:
-        if not isinstance(vec, list):
-            raise TypeError("coef_matr should be list[list]")
-
-    for i in range(len(coef_matr)):
-        ma = max(abs(coef_matr[i]))
-
-        if ma <= (sum(abs(coef_matr[i])) - ma):
-            Zeidel_conditional = False
+        if not (isinstance(vec, list) or isinstance(vec, np.ndarray)):
+            raise TypeError("coef_matr should be list[list] or numpy.ndarray")
 
     if abs(np.linalg.det(coef_matr)) < 0.0000001:
-        pass
+        raise Exception("Determenant is equal to zero")
 
-    else:
-        raise ValueError("Determenant is equal to zero")
+    algos_arr = [seidel.Zeydel, lude.solve_LU, gaule.solve, trimatal.transfiguration,
+                 sim.SimpleIt, gauel.gauss_elimination, gausm.gauss]
+
+    for method in algos_arr:
+        try:
+            return method(coef_matr, free_coef)
+        except:
+            pass
 
 
 def Sparse_matrix(n: int):
@@ -155,6 +155,6 @@ def speed_test():
 
 
 if __name__ == '__main__':
-    # main()
+    main()
 
-    speed_test()
+
