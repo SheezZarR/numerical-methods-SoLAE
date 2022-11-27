@@ -12,7 +12,12 @@ import numpy as np
 
 
 def solve(coef_matr: List[list], free_coef: list) -> np.array:
-    Zeidel_conditional = True
+    """
+    main function, which solve SoLAE
+    :coef_matr: matrix of coefficients (List[List] or numpy.ndarray)
+    :free_coef: vector of free coefficients (List or numpy.ndarray)
+    :return: np.array
+    """
     if not (isinstance(coef_matr, list) or isinstance(coef_matr, np.ndarray)):
         raise TypeError("coef_matr should be list or numpy.ndarray")
     if not (isinstance(free_coef, list) or isinstance(free_coef, np.ndarray)):
