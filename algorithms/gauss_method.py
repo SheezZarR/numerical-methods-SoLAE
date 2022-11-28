@@ -64,7 +64,7 @@ def gauss(a, vec):
     for _ in range(len(a)):
         a[_] = list(a[_])
         a[_].append(vec[_][0])
-    a = np.array(a)
+    a = np.ndarray(a)
     count_swap = triangle(a)
     det = determinant(a, count_swap)
     flag = abs(det) < eps

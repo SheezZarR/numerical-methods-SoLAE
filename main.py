@@ -1,4 +1,5 @@
 from typing import List
+import copy
 import time
 import scipy
 from algorithms import gauss_elimination as gauel
@@ -34,9 +35,11 @@ def solve(coef_matr: List[list], free_coef: list) -> np.array:
 
     for method in algos_arr:
         try:
-            return method(coef_matr, free_coef)
+            return method(copy.deepcopy(coef_matr), copy.deepcopy(free_coef))
         except:
             pass
+
+    return np.linalg.solve(coef_matr, free_coef)
 
 
 def Sparse_matrix(n: int):
@@ -142,8 +145,8 @@ def speed_test():
     for i, item in enumerate(algos_arr):
         try:
             start = time.time()
-            print(item(A.copy(), b.copy())[:6])
-            time_matr.append(time.time() - start)
+            print(solve(A, b))
+            print(time.time() - start)
         except:
             print(i)
     print('time= ', time_matr)
@@ -153,13 +156,13 @@ def speed_test():
     for i, item in enumerate(algos_arr):
         try:
             start = time.time()
-            print(item(A.copy(), b.copy())[:6])
-            time_matr.append(time.time() - start)
+            solve(A,b)
+            print(time.time() - start)
         except:
             print(i)
 
 
 if __name__ == '__main__':
-    main()
+    speed_test()
 
 
