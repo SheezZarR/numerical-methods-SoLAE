@@ -14,8 +14,7 @@ def decompose_to_LU(a):
 
     for k in range(n):
         # calculate all residual k-row elements
-        if lu_matrix[k, k] == 0:
-            raise Exception('Wrong matrix')
+        ы
         for j in range(k, n):
             lu_matrix[k, j] = a[k, j] - lu_matrix[k, :k] * lu_matrix[:k, j]
         # calculate all residual k-column elemetns
