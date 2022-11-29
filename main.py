@@ -152,11 +152,10 @@ def speed_test():
     print('time= ', time_matr)
     print('************')
     A, b, x = Sparse_matrix(120)
-    time_matr = []
     for i, item in enumerate(algos_arr):
         try:
             start = time.time()
-            solve(A,b)
+            (solve(A, b))
             print(time.time() - start)
         except:
             print(i)

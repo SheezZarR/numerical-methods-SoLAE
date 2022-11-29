@@ -61,7 +61,7 @@ def proverka(x, xPrev):
 
 def SimpleIt(A, b, eps=5):
     eps_ = pow(10, (-1) * eps)
-    A, b = np.array(A), np.array(b)
+    A, b = np.array(A), np.matrix(b)
     A, b = A.astype(float), b.astype(float)
     m = len(A)
     x = [0. for i in range(m)]
