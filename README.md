@@ -1,8 +1,19 @@
 # Numerical methods for solving system of algebraic linear equations.
 ## Responsibilities
 
-### Всегда подается квадратная матрица любой размерности NxN и горизонтальный вектор размерности 1xN
+### Всегда подается квадратная матрица любой размерности NxN и горизонтальный вектор размерности 1xN.
 
+### Вызов main функции.
+```python 
+ """
+    main function, which solve SoLAE
+    :coef_matr: matrix of coefficients (List[List] or numpy.ndarray)
+    :free_coef: vector of free coefficients (List or numpy.ndarray)
+    :return: np.array
+    """
+   import main as own
+   own.solve(coef_matr: List[list], free_coef: list)
+   ```
 ### Решение СЛАУ с помощью метода Зейделя.
 ```python 
    from algorithms import seidel 
@@ -15,7 +26,7 @@ from algorithms import LU_decomposition as lude
 lude.solve_LU(matrix,vec) 
 ```
 
-### Метод Гаусса с выбором ведущего элемента по столбцам
+### Метод Гаусса с выбором ведущего элемента по столбцам.
 ```python 
 from algorithms import gauss_leader as gaule
 gaule.solve(matrix,vec) 
