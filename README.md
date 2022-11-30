@@ -1,7 +1,7 @@
 # Numerical methods for solving system of algebraic linear equations.
 ## Responsibilities
 
-### Всегда подается квадратная матрица любой размерности NxN и горизонтальный вектор вектор размерности 1xN
+### Всегда подается квадратная матрица любой размерности NxN и горизонтальный вектор размерности 1xN
 
 ### Решение СЛАУ с помощью метода Зейделя.
 - from algorithms import seidel
