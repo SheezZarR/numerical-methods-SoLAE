@@ -4,32 +4,45 @@
 ### Всегда подается квадратная матрица любой размерности NxN и горизонтальный вектор размерности 1xN
 
 ### Решение СЛАУ с помощью метода Зейделя.
-`   from algorithms import seidel `
-  `  seidel.Zeydel(matrix,vec) `
+```python 
+   from algorithms import seidel 
+   seidel.Zeydel(matrix,vec) 
+   ```
 
 ### Решение СЛАУ с помощью LU-разложения.
-- from algorithms import LU_decomposition as lude
-- lude.solve_LU(matrix,vec) 
+```python 
+from algorithms import LU_decomposition as lude
+lude.solve_LU(matrix,vec) 
+```
 
 ### Метод Гаусса с выбором ведущего элемента по столбцам
-- from algorithms import gauss_leader as gaule
-- gaule.solve(matrix,vec) 
+```python 
+from algorithms import gauss_leader as gaule
+gaule.solve(matrix,vec) 
+```
 
 ### Тридиагональный матричный алгоритм.
-- from algorithms import tridiagonal_matrix_algorithm as trimatal
-- trimatal.transfiguration(matrix,vec) 
-
+```python 
+from algorithms import tridiagonal_matrix_algorithm as trimatal
+trimatal.transfiguration(matrix,vec) 
+```
 ### Метод простых итераций.
-- from algorithms import Simple_Iteration as sim
-- sim.SimpleIt(matrix,vec) 
+```python 
+from algorithms import Simple_Iteration as sim
+sim.SimpleIt(matrix,vec) 
+```
 
 ### Метод Гаусса с исключением.
-- from algorithms import gauss_elimination as gauel
-- gauel.gauss_elimination(matrix,vec) 
+```python 
+from algorithms import gauss_elimination as gauel
+gauel.gauss_elimination(matrix,vec) 
+```
 
 ### Метод Гаусса.
-- from algorithms import gauss_method as gausm
-- gausm.gauss(matrix,vec) 
+```python 
+from algorithms import gauss_method as gausm
+gausm.gauss(matrix,vec) 
+```
 
 ### Разработчики:
 - Alexander "[@oCatano](https://github.com/oCatano)" Aivazov - LU Decomposition method, library usage examples
