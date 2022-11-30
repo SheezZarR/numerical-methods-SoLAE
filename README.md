@@ -11,7 +11,7 @@ seidel.Zeydel(matrix,vec)
 from algorithms import LU_decomposition as lude
 lude.solve_LU(matrix,vec) 
 
-### Метод Гаусса с выбором ведущего элемента по столбцам.
+### Метод Гаусса с выбором ведущего элемента по столбцам
 from algorithms import gauss_leader as gaule
 gaule.solve(matrix,vec) 
 
