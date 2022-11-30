@@ -4,8 +4,8 @@
 ### Всегда подается квадратная матрица любой размерности NxN и горизонтальный вектор размерности 1xN
 
 ### Решение СЛАУ с помощью метода Зейделя.
-~~ from algorithms import seidel
-~~ seidel.Zeydel(matrix,vec) 
+`   from algorithms import seidel
+    seidel.Zeydel(matrix,vec) `
 
 ### Решение СЛАУ с помощью LU-разложения.
 - from algorithms import LU_decomposition as lude
