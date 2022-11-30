@@ -8,7 +8,7 @@
  """
     main function, which solve SoLAE
     :coef_matr: matrix of coefficients (List[List] or numpy.ndarray)
-    :free_coef: vector of free coefficients (List or numpy.ndarray)
+    :free_coef: vector of free coefficients  (List or numpy.ndarray)
     :return: np.array
     """
    import main as own
