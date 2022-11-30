@@ -36,12 +36,22 @@ def cook_data(matrix, vec) -> (np.ndarray, np.ndarray):
 
 
 class TestGausMethod(unittest.TestCase):
+
+    def check(self, coef_mat, vec, ans):
+        cfm, vc = cook_data(coef_mat, vec)
+        test = gausm.gauss(cfm, vc)
+        print(test)
+        print(ans)
+        print()
+        #self.assertEqual(test, ans)
+
     """Test cases for gaussian method."""
     def test_gauss_method_1(self):
-        cfm, vc = cook_data(coef_mat1, vec1)
-        test = gausm.gauss(cfm, vc)
-        self.assertEqual(test, ans1)
-
+        self.check(coef_mat1, vec1, ans1)
+        self.check(coef_mat2, vec2, ans2)
+        self.check(coef_mat3, vec3, ans3)
+        self.check(coef_mat4, vec4, ans4)
+        self.check(coef_mat5, vec5, ans5)
 
 class TestGauelMethod(unittest.TestCase):
     """Test cases for gauss elimination method."""
@@ -131,3 +141,6 @@ class TestSeidelMethod(unittest.TestCase):
         test = seidel.Zeydel(cfm, vc, coef3)
         self.assertEqual(ans3, test)
 
+
+var = TestGausMethod()
+var.test_gauss_method_1()
