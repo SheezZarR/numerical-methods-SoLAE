@@ -18,6 +18,7 @@ from equations.sample2 import matrix as coef_mat2, vec as vec2, correct_ans as a
 from equations.sample3 import matrix as coef_mat3, vec as vec3, correct_ans as ans3, corr_coef as coef3
 from equations.sample_desparse_1 import matrix as coef_mat4, vec as vec4, correct_ans as ans4
 from equations.sample_desparse_2 import matrix as coef_mat5, vec as vec5, correct_ans as ans5
+from equations.sample_desparse_3 import matrix as coef_mat6, vec as vec6, correct_ans as ans6
 
 
 def cook_data(matrix, vec) -> (np.ndarray, np.ndarray):
@@ -130,4 +131,9 @@ class TestSeidelMethod(unittest.TestCase):
         cfm, vc = cook_data(coef_mat3, vec3)
         test = seidel.Zeydel(cfm, vc, coef3)
         self.assertEqual(ans3, test)
+
+    def test_seidel(self):
+        cfm, vc = cook_data(coef_mat6, vec6)
+        test = seidel.Zeydel(cfm, vc, 5)
+        self.assertEqual(ans6, test)
 
