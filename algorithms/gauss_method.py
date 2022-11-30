@@ -37,11 +37,13 @@ def sub(a, row_one, row_two, mn=1):
 def triangle(a):
     n = len(a)
     count_swap = 0
+    print(n)
     for j in range(n):
         count_swap = maxelement(a, j, count_swap)
         for i in range(j + 1, n):
             c = a[i][j] / a[j][j]
             sub(a, i, j, c)
+        #print(j)
     return count_swap
 
 
@@ -50,8 +52,7 @@ def searchSolution(a):
     solution = [0 for i in range(n)]
     for i in range(n - 1, -1, -1):
         solution[i] = a[i][n] / a[i][i]
-        if abs(solution[i] - round(solution[i])) < eps:
-            solution[i] = round(solution[i])
+        #   print("solution =", solution)
         for j in range(i - 1, -1, -1):
             a[j][n] -= a[j][i] * solution[i]
 
@@ -64,13 +65,16 @@ def gauss(a, vec):
     for _ in range(len(a)):
         a[_] = list(a[_])
         a[_].append(vec[_][0])
-    a = np.ndarray(a)
+    a = np.array(a)
+    #print("1")
     count_swap = triangle(a)
+    #print("2")
     det = determinant(a, count_swap)
     flag = abs(det) < eps
     if flag:
         print("\nМатрица вырожденная. Определитель равен нулю\n")
         exit(1)
+    #print("3")
     x = searchSolution(a)
-    #print(x)
+    print()
     return x

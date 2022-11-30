@@ -34,12 +34,15 @@ def solve(coef_matr: List[list], free_coef: list) -> np.array:
                  sim.SimpleIt, gauel.gauss_elimination, gausm.gauss]
 
     for method in algos_arr:
+        print("Attempting method...")
         try:
             return method(copy.deepcopy(coef_matr), copy.deepcopy(free_coef))
-        except:
-            pass
-
-    return np.linalg.solve(coef_matr, free_coef)
+        except Exception as err:
+            print(f"Method {method} does not work")
+            print(f"{err} {type(err)}")
+        print()
+    return "Wrong_answer"
+    # return np.linalg.solve(coef_matr, free_coef)
 
 
 def Sparse_matrix(n: int):
@@ -102,7 +105,6 @@ def Dense_matrix(n: int):
 
 
 def three_diag_matrix_generator(n: int):
-    n = 10
     A = np.zeros(shape=(n, n))
     for i in range(-1, 1):
         d = np.diagflat(np.random.randint(1, 21, n - (i % 2)), i)
@@ -155,13 +157,21 @@ def speed_test():
     for i, item in enumerate(algos_arr):
         try:
             start = time.time()
-            (solve(A, b))
+            print(solve(A, b)[:4])
             print(time.time() - start)
         except:
             print(i)
 
+def sparce_matr_dist():
+    A, b, x = Sparse_matrix(120)
+    print(np.linalg.det(A))
+    print(A.shape)
+    print(b.shape)
+    print(solve(A, b)[:5])
+    print(np.linalg.solve(A, b)[:5])
+
 
 if __name__ == '__main__':
-    speed_test()
-
+    # speed_test()
+    sparce_matr_dist()
 

@@ -13,7 +13,7 @@ def Corr(A, b):
     for i in range(len(A)):
         ma = max(abs(A[i]))
         for j in range(len(A)):
-            if A[i][j] == ma:
+            if A[i, j] == ma:
                 in_ = j
                 break
 
@@ -22,13 +22,15 @@ def Corr(A, b):
             b[[i, in_]] = b[[in_, i]]
 
     for i in range(len(A)):
-        if abs(A[i][i]) != max(abs(A[i])):
+        if abs(A[i, i]) != max(abs(A[i])):
             raise Exception("Use matrix which can be modified into a diagonally dominant one")
 
     for i in range(len(A)):
-        z = A[i][i]
+        z = A[i, i]
+
         for j in range(len(A)):
-            A[i][j] /= z
+            A[i, j] /= z
+
         b[i] /= z
     return A, b
 
@@ -41,12 +43,13 @@ def Zeydel(A, b, e=5):
     x = [0. for i in range(m)]
     count = 0
     pogr = 0
+    print(A.shape, b.shape)
     A, b = Corr(A, b)
     while True:
         x_new = np.copy(x)
         for i in range(m):
-            s1 = sum(A[i][j] * x_new[j] for j in range(i))
-            s2 = sum(A[i][j] * x[j] for j in range(i + 1, m))
+            s1 = sum(A[i, j] * x_new[j] for j in range(i))
+            s2 = sum(A[i, j] * x[j] for j in range(i + 1, m))
             x_new[i] = b[i] - s1 - s2  # Получаем начальные значения для x1,x2,x3,...,xn
         #print(x_new)
         pogr = sum(abs(x_new[i] - x[i]) for i in range(m))  # погрешность

@@ -40,10 +40,11 @@ def backward(m, k):
 '''Функция обратного хода'''
 
 
-def transfiguration(matx, vec):
+def transfiguration(matx, vec: np.ndarray):
     if not three_diag_check(matx):
         raise Exception("Заданная матрица не соответствует выбранному методу решения")
 
+    vec = vec.transpose()
     mat = np.array([[0] * (len(matx) + 1)] * len(matx[0]), dtype = float)
     for i in range(0, len(mat)):
         for j in range(0, len(mat)):

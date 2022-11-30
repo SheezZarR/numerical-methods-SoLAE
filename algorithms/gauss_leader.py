@@ -19,6 +19,7 @@ def solve(m, X):
     sa = len(X)
     mas = []
     n = len(m)
+    X = X.transpose()
     for i in range(sa):
         mas.append([0] * 1)
         mas[i][0] = X[i]
