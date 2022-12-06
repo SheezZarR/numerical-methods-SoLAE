@@ -59,22 +59,19 @@ def searchSolution(a):
     return solution
 
 
+
 def gauss(a, vec):
+
     a = deepcopy(a)
-    a = list(a)
-    for _ in range(len(a)):
-        a[_] = list(a[_])
-        a[_].append(vec[_][0])
+    a = np.hstack((a, vec))
     a = np.array(a, dtype=float)
-    #print("1")
+
     count_swap = triangle(a)
-    #print("2")
     det = determinant(a, count_swap)
-    flag = abs(det) < eps
-    if flag:
+
+    if abs(det) < eps:
         print("\nМатрица вырожденная. Определитель равен нулю\n")
         exit(1)
-    #print("3")
-    x = searchSolution(a)
-    print()
-    return x
+        
+    return searchSolution(a)
+
