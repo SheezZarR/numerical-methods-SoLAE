@@ -65,7 +65,7 @@ def gauss(a, vec):
     for _ in range(len(a)):
         a[_] = list(a[_])
         a[_].append(vec[_][0])
-    a = np.array(a)
+    a = np.array(a, dtype=float)
     #print("1")
     count_swap = triangle(a)
     #print("2")
