@@ -37,11 +37,10 @@ def solve(coef_matr: List[list], free_coef: list) -> np.array:
         print("Attempting method...")
         try:
             return method(copy.deepcopy(coef_matr), copy.deepcopy(free_coef))
-        except Exception as err:
-            print(f"Method {method} does not work")
-            print(f"{err} {type(err)}")
-        print()
-    return "Wrong_answer"
+        except:
+            pass
+
+    raise Exception("Sorry we are fools")   
     # return np.linalg.solve(coef_matr, free_coef)
 
 
@@ -167,11 +166,11 @@ def sparce_matr_dist():
     print(np.linalg.det(A))
     print(A.shape)
     print(b.shape)
-    print(solve(A, b)[:5])
+    print(gausm.gauss(A, b)[:5])
     print(np.linalg.solve(A, b)[:5])
 
 
 if __name__ == '__main__':
-    # speed_test()
-    sparce_matr_dist()
+    speed_test()
+    # sparce_matr_dist()
 
